@@ -9,4 +9,8 @@ typedef struct FrameBuffers_s {
 	short* fb3;
 } FrameBuffers_t;
 
+void init_vi(int, FrameBuffers_t*);
+void swap_buffers(FrameBuffers_t*);
+void clear_buffer(short*, short);
+
 #endif

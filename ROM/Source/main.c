@@ -1,11 +1,9 @@
 #include "structs.h"
 #include "vi.h"
 #include "get_asset.h"
+#include "draw_text.h"
 
-void init_vi(int, FrameBuffers_t*);
-void swap_buffers(FrameBuffers_t*);
-void draw_text(char*, short*);
-void clear_buffer(short*, short);
+#define DEMO_TEXT
 
 void __start()
 {
@@ -14,14 +12,17 @@ void __start()
 	clear_buffer(fbs.fb1, 0x07C1);
 	clear_buffer(fbs.fb2, 0x0001);
 
-	//draw_text("Test lmaoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", fbs.fb1);
+#ifdef DEMO_TEXT
+	draw_text("Test lmaoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", fbs.fb1);
 
-	/*
+	
 	int a = 0;
 	while(1)
 		a++;
-	*/
 	
+#endif
+
+#ifdef DEMO_FLASH
 	while(1)
 	{
 		int a = 0;
@@ -30,5 +31,6 @@ void __start()
 		
 		swap_buffers(&fbs);
 	}
-	
+#endif
+
 }

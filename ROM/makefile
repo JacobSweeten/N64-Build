@@ -22,13 +22,13 @@ game: link_game
 link_game: main.c.o main.s.o vi.c.o draw_text.c.o get_asset.c.o
 	mips-linux-gnu-ld $(build_options) -Ttext 0x80000400 Obj/main.c.o Obj/main.s.o Obj/vi.c.o Obj/draw_text.c.o Obj/get_asset.c.o -o Obj/game
 
-vi.c.o: Source/vi.c
+vi.c.o: Source/vi.c Source/vi.h
 	mips-linux-gnu-gcc $(build_options) $(gcc_options) Source/vi.c -o Obj/vi.c.o
 
 get_asset.c.o: Source/get_asset.c Source/get_asset.h
 	mips-linux-gnu-gcc $(build_options) $(gcc_options) Source/get_asset.c -o Obj/get_asset.c.o
 
-draw_text.c.o: Source/draw_text.c
+draw_text.c.o: Source/draw_text.c Source/draw_text.h
 	mips-linux-gnu-gcc $(build_options) $(gcc_options) Source/draw_text.c -o Obj/draw_text.c.o
 
 main.c.o: Source/main.c 

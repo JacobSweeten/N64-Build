@@ -4,7 +4,7 @@ int get_asset_by_id(asset_t* asset, int id)
 {
 	int* ptr1 = (int*)0xB0001004;
 	int* ptr2 = (int*)ptr1[0];
-	char* data = (char*)ptr2 + 0xB0000000;
+	char* data = (char*)ptr2;
 	int idx = 0;
 
 	do

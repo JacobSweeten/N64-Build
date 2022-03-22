@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 
 	fread(headerData.game, 1, gameLen, gameFile);
 
-	headerData.assetStart = 0x1000 + gameLen + 8;
+	headerData.assetStart = gameLen + 0x80000400;
 
 	// Load asset file
 	fseek(assetFile, 0L, SEEK_END);

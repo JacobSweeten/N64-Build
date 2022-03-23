@@ -3,7 +3,7 @@
 copy_game:
 	# Select the address of the ROM size
 	lui		$9, 0xB000
-	addiu	$9, 0x1000
+	ori		$9, $9, 0x1000
 
 	# Get the rom size
 	lw		$14, 0($9)
@@ -16,7 +16,7 @@ copy_game:
 
 	# Select the base address of the destination
 	lui		$10, 0x8000
-	addiu	$10, 0x0400
+	ori		$10, $10, 0x0400
 
 	# Set length counter
 	addu	$11, $0, $14
@@ -36,6 +36,6 @@ _copy_game_loop:
 
 finish:
 	lui		$9, 0x8000		# Select entry point
-	addiu	$9, $9, 0x0400
+	ori		$9, $9, 0x0400
 	jr		$9				# Go!
 

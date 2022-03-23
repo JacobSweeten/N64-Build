@@ -1,5 +1,5 @@
 build_options = -mips3 -EB -G0
-gcc_options = -I./ -c -mno-shared -mfix4300 -fno-PIC -mno-abicalls -mno-shared
+gcc_options = -O2 -I./ -c -mno-shared -mfix4300 -fno-PIC -mno-abicalls -mno-shared
 
 all: build_rom
 

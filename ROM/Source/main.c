@@ -13,10 +13,10 @@ void __start()
 	clear_buffer(fbs.fb2, 0x0001);
 
 #ifdef DEMO_TEXT
-	draw_text("Test lmaoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", fbs.fb1);
+	draw_text("ABCDEFG", fbs.fb1);
 
 	
-	int a = 0;
+	volatile int a = 0;
 	while(1)
 		a++;
 	
@@ -25,7 +25,7 @@ void __start()
 #ifdef DEMO_FLASH
 	while(1)
 	{
-		int a = 0;
+		volatile int a = 0;
 		while(a < 1000000)
 			a++;
 		

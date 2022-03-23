@@ -34,10 +34,7 @@ void draw_text(char* text, short* frameBuffer)
 	// Convert case
 	for(int i = 0; i < len; i++)
 	{
-		if(text[i] > 90)
-		{
-			text[i] = text[i] - 32;
-		}
+		text[i] = text[i] & 0b11011111;
 	}
 
 	int x = 0;
@@ -62,7 +59,11 @@ void draw_text(char* text, short* frameBuffer)
 				int xDstRow = (x * 8) + j;
 				int dstPos = yDst + xDstRow;
 				int srcPos = (index * 8 + j) + (288 * k);
-				frameBuffer[dstPos] = spriteSheet.data[srcPos];
+
+				short px = spriteSheet.data[srcPos + 1];
+				px |= spriteSheet.data[srcPos] << 8;
+				
+				frameBuffer[dstPos] = px;
 			}
 		}
 

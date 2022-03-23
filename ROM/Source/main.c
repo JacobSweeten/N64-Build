@@ -13,7 +13,8 @@ void __start()
 	clear_buffer(fbs.fb2, 0x0001);
 
 #ifdef DEMO_TEXT
-	draw_text("ABCDEFG", fbs.fb1);
+	//draw_text("0", fbs.fb1);
+	draw_text("\nFINISHED LOADING VI", fbs.fb1);
 
 	
 	volatile int a = 0;

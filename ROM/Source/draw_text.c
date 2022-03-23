@@ -8,7 +8,7 @@ int get_idx(char c)
 	else if(c >= 'A' && c <= 'Z')
 		return c - 55;
 	else
-		return 0;
+		return -1;
 }
 
 void draw_text(char* text, short* frameBuffer)
@@ -21,7 +21,10 @@ void draw_text(char* text, short* frameBuffer)
 	{
 		int a = *(int*)(0xFFFFFFFF);
 	}
-	
+
+	asset_image_type_data_t imgData = *(asset_image_type_data_t*)&spriteSheet.assetData;
+	short* img = (short*)spriteSheet.data;
+
 	// Get length
 	char c = text[0];
 	int len = 0;
@@ -34,7 +37,8 @@ void draw_text(char* text, short* frameBuffer)
 	// Convert case
 	for(int i = 0; i < len; i++)
 	{
-		text[i] = text[i] & 0b11011111;
+		if(text[i] >= 'a' && text[i] <= 'z')
+			text[i] = text[i] & 0b11011111;
 	}
 
 	int x = 0;
@@ -50,23 +54,31 @@ void draw_text(char* text, short* frameBuffer)
 			y++;
 		}
 
-		for(int j = 0; j < 8; j++)
+		if(index != -1)
 		{
-			for(int k = 0; k < 16; k++)
+			for(int j = 0; j < 8; j++)
 			{
-				// TODO: Check this math
-				int yDst = (y * 16 * 320) + (k * 320);
-				int xDstRow = (x * 8) + j;
-				int dstPos = yDst + xDstRow;
-				int srcPos = (index * 8 + j) + (288 * k);
+				for(int k = 0; k < 16; k++)
+				{
+					// TODO: Check this math
+					int yDst = (y * 16 * 320) + (k * 320);
+					int xDstRow = (x * 8) + j;
+					int dstPos = yDst + xDstRow;
+					int srcPos = (index * 8 + j) + (imgData.width * k);
 
-				short px = spriteSheet.data[srcPos + 1];
-				px |= spriteSheet.data[srcPos] << 8;
-				
-				frameBuffer[dstPos] = px;
+					frameBuffer[dstPos] = img[srcPos];
+				}
 			}
+			x++;
 		}
-
-		x++;
+		else if(text[i] == '\n')
+		{
+			y++;
+			x = 0;
+		}
+		else
+		{
+			x++;
+		}
 	}
 }
